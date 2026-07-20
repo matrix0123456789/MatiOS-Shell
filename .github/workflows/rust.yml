@@ -1,0 +1,27 @@
+name: Rust
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build
+      run: cargo +nightly build -Z json-target-spec --target x86_64.json
+    - name: Copy
+      run: rust-objcopy target/x86_64/debug/MatiOsShell -O elf64-x86-64 target/matiosshell.matiosexe
+    - name: upload
+      uses: actions/upload-artifact@v7
+      with:
+        name: matiosshell
+        path: target/matiosshell.matiosexe
