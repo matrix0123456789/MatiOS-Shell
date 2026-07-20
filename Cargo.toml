@@ -1,0 +1,7 @@
+[package]
+name = "MatiOsShell"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+MatiOS-SDK-Rust = { path="../../MatiOS-SDK-Rust" }

@@ -1,0 +1,9 @@
+[unstable]
+build-std=["core", "compiler_builtins", "alloc"]
+
+[build]
+rustflags = [
+    "-C", "relocation-model=pie",
+    "-C", "link-args=-pie",
+    "-C", "link-arg=-Tlink.x"
+]
