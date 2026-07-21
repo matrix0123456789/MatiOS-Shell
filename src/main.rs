@@ -31,6 +31,7 @@ pub unsafe extern "win64" fn main(a: *const ProcessStartInfo) -> u64 {
     ALLOC.init((*a).allocate);
     ProcessStartInfo::init(a);
     Terminal::init();
+    Terminal::write("MatiOS Shell\n\n>");
     let mut buffer = String::new();
     loop {
         let char = Terminal::read();
@@ -38,6 +39,7 @@ pub unsafe extern "win64" fn main(a: *const ProcessStartInfo) -> u64 {
             Terminal::write("\n");
             executer::Executer::ExecuteLine(buffer.clone());
             buffer.clear();
+            Terminal::write("\n>");
         } else {
             buffer.push_str(&char);
             Terminal::write(&char);

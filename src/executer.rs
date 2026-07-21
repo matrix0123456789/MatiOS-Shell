@@ -1,4 +1,5 @@
 use alloc::string::String;
+use alloc::vec;
 use crate::commands::BUILT_IN_COMMANDS;
 use crate::terminal::Terminal;
 
@@ -12,7 +13,8 @@ impl  Executer {
         c.get_name() == command || c.get_aliases().iter().any(|alias| alias == command)
      });
      if let Some(command) = found_command {
-         command.execute();
+         let params = line.split_whitespace().skip(1).map(|s| (String::from("tmp"), String::from(s))).collect();
+         command.execute(params);
      }else{
          Terminal::write("Command not found");
      }
